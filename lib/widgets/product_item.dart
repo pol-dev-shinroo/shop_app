@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
+import "package:provider/provider.dart";
 
 import "../screens/product_detail_screen.dart";
+import "../providers/product.dart";
 
 class ProductItem extends StatelessWidget {
-  final String id;
-  final String title;
-  final String imageUrl;
-
-  const ProductItem(this.id, this.title, this.imageUrl, {super.key});
+  const ProductItem({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // listen: false here means, each item does not care for other items being toggled favorite
+    final product = Provider.of<Product>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black38,
           leading: IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {},
+            icon: Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border),
+            onPressed: () {
+              product.toggleFavorite();
+            },
             color: Theme.of(context).colorScheme.secondary,
           ),
           title: Text(
-            title,
+            product.title,
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
@@ -35,11 +38,11 @@ class ProductItem extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pushNamed(
               ProductDetailScreen.routeName,
-              arguments: id,
+              arguments: product.id,
             );
           },
           child: Image.network(
-            imageUrl,
+            product.imageUrl,
             fit: BoxFit.cover,
           ),
         ),
