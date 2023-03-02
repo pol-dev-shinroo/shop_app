@@ -13,6 +13,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // not recommended to use shortcut here (value)
+    // because here we are instatiating a class
     return ChangeNotifierProvider(
       create: (ctx) => Products(),
       child: MaterialApp(

@@ -14,8 +14,14 @@ class ProductsGrid extends StatelessWidget {
     return GridView.builder(
       padding: const EdgeInsets.all(10),
       itemCount: products.length,
-      itemBuilder: (ctx, idx) => ChangeNotifierProvider(
-        create: (ctx) => products[idx],
+      // short cut instead of using create
+      // also this is recommended if not instantiating a class
+      // => here we are reusing existing object product[idx]
+      // hence, in the main.dart where you instantiate a class, leave it the old way
+
+      // also changeNotifier automatically cleans up data when we add page (stack), or remove
+      itemBuilder: (ctx, idx) => ChangeNotifierProvider.value(
+        value: products[idx],
         child: const ProductItem(),
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
