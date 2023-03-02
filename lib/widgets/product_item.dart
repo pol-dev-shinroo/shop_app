@@ -9,13 +9,12 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // listen: false here means, each item does not care for other items being toggled favorite
-    final product = Provider.of<Product>(context, listen: false);
+    final product = Provider.of<Product>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         footer: GridTileBar(
-          backgroundColor: Colors.black38,
+          backgroundColor: Colors.black87,
           leading: IconButton(
             icon: Icon(
                 product.isFavorite ? Icons.favorite : Icons.favorite_border),
