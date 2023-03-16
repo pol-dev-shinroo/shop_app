@@ -1,2 +1,2 @@
 # shop_app
-state management in flutter
+the state management in flutter
